@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">WDIL</string>
+    <string name="enterSerie">Introduce una serie.</string>
+    <string name="subir"> + </string>
+    <string name="bajar"> - </string>
+    <string name="season">Temporada</string>
+    <string name="cap">Capítulo</string>
+    <string name="nombrenuevo">Nombre de la Serie: </string>
+    <string name="temporadanuevo">Temporada actual: </string>
+    <string name="capitulonuevo">Capitulo actual: </string>
+</resources>
