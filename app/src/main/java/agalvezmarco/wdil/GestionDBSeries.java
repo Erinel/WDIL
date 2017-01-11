@@ -62,6 +62,17 @@ public class GestionDBSeries extends SQLiteOpenHelper {
         return aux;
     }
 
+    public int updateSerie(Serie serie) {
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("temporada", serie.getTemporada());
+        cv.put("capitulo", serie.getCapitulo());
+
+        return db.update(SeriesContract.SerieEntry.TABLE_NAME, cv, SeriesContract.SerieEntry.NOMBRE + "= '" + serie.getNombre() + "'", null);
+
+    }
 
 
 

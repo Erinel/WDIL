@@ -70,6 +70,7 @@ public class Series_fragment extends Fragment {
                         temporadaTexto.setText("" +series.get(i).getTemporada());
                         capituloTexto.setText("" +series.get(i).getCapitulo());
                         estadoBotones(true);
+                        visibilidadBotones(View.VISIBLE);
                     }
                 }
 
@@ -86,6 +87,61 @@ public class Series_fragment extends Fragment {
             }
         });
 
+        addCapitulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                for(int i = 0; i < series.size(); i++) {
+                    if(entrada.getText().toString().equals(series.get(i).getNombre())) {
+                        series.get(i).setCapitulo(series.get(i).getCapitulo() + 1);
+                        db.updateSerie(series.get(i));
+                        capituloTexto.setText("" +series.get(i).getCapitulo());
+                    }
+                }
+            }
+        });
+
+        minusCapitulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                for(int i = 0; i < series.size(); i++) {
+                    if(entrada.getText().toString().equals(series.get(i).getNombre())) {
+                        series.get(i).setCapitulo(series.get(i).getCapitulo() - 1);
+                        db.updateSerie(series.get(i));
+                        capituloTexto.setText("" +series.get(i).getCapitulo());
+                    }
+                }
+            }
+        });
+
+        addTemporada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                for(int i = 0; i < series.size(); i++) {
+                    if(entrada.getText().toString().equals(series.get(i).getNombre())) {
+                        series.get(i).setTemporada(series.get(i).getTemporada() + 1);
+                        db.updateSerie(series.get(i));
+                        temporadaTexto.setText("" +series.get(i).getTemporada());
+                    }
+                }
+            }
+        });
+
+        minusTemporada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                for(int i = 0; i < series.size(); i++) {
+                    if(entrada.getText().toString().equals(series.get(i).getNombre())) {
+                        series.get(i).setTemporada(series.get(i).getTemporada() - 1);
+                        db.updateSerie(series.get(i));
+                        temporadaTexto.setText("" +series.get(i).getTemporada());
+                    }
+                }
+            }
+        });
 
         return rootView;
     }
@@ -156,6 +212,13 @@ public class Series_fragment extends Fragment {
         addTemporada.setEnabled(estado);
         minusCapitulo.setEnabled(estado);
         minusTemporada.setEnabled(estado);
+    }
+
+    private void visibilidadBotones(int estado) {
+        addCapitulo.setVisibility(estado);
+        addTemporada.setVisibility(estado);
+        minusCapitulo.setVisibility(estado);
+        minusTemporada.setVisibility(estado);
     }
 }
 

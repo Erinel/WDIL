@@ -98,28 +98,32 @@
                     android:layout_width="40dp"
                     android:layout_weight="1"
                     android:layout_height="40dp"
-                    android:text="@string/bajar" />
+                    android:text="@string/bajar"
+                    android:visibility="invisible"/>
 
                 <Button
                     android:id="@+id/addSeason"
                     android:layout_width="40dp"
                     android:layout_weight="1"
                     android:layout_height="40dp"
-                    android:text="@string/subir" />
-
-                <Button
-                    android:id="@+id/addCap"
-                    android:layout_weight="1"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:text="@string/bajar" />
+                    android:text="@string/subir"
+                    android:visibility="invisible"/>
 
                 <Button
                     android:id="@+id/sustractCap"
                     android:layout_weight="1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:text="@string/subir" />
+                    android:text="@string/bajar"
+                    android:visibility="invisible"/>
+
+                <Button
+                    android:id="@+id/addCap"
+                    android:layout_weight="1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="@string/subir"
+                    android:visibility="invisible"/>
             </TableRow>
         </TableLayout>
     </LinearLayout>
