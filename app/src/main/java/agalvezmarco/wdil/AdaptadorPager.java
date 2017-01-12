@@ -21,7 +21,7 @@ public class AdaptadorPager extends FragmentPagerAdapter {
                 f = new Series_fragment();
                 break;
             /*case 1:
-                f = new Fragment2();
+                f = new Manga_fragment();
                 break;
             case 2:
                 f = new Fragment3();

@@ -8,4 +8,5 @@
     <string name="nombrenuevo">Nombre de la Serie: </string>
     <string name="temporadanuevo">Temporada actual: </string>
     <string name="capitulonuevo">Capitulo actual: </string>
+    <string name="enterManga">Introduce un manga.</string>
 </resources>

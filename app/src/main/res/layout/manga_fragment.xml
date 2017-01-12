@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/degradadobackground"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompletarManga"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="100dp"
+        android:hint="@string/enterManga"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF" />
+
+
+    <TextView
+        android:id="@+id/capM"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:text="@string/cap"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+
+    <TextView
+        android:id="@+id/textCap"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_weight="0.13" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/sustractCapM"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="@string/bajar"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/addCapM"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="@string/subir"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/nuevoManga"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/newentry" />
+
+</FrameLayout>

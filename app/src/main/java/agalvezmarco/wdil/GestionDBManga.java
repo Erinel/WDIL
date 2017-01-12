@@ -9,24 +9,23 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 /**
- * Created by aleja on 20/12/2016.
+ * Created by aleja on 12/01/2017.
  */
 
-public class GestionDBSeries extends SQLiteOpenHelper {
+public class GestionDBManga extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Series.db";
+    public static final String DATABASE_NAME = "Mangas.db";
 
-    public GestionDBSeries(Context context) {
+    public GestionDBManga(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + SeriesContract.SerieEntry.TABLE_NAME + " ("
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + MangasContract.MangaEntry.TABLE_NAME + " ("
                 + SeriesContract.SerieEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + SeriesContract.SerieEntry.NOMBRE + " TEXT NOT NULL,"
-                + SeriesContract.SerieEntry.TEMPORADA + " INTEGER NOT NULL,"
                 + SeriesContract.SerieEntry.CAPITULO + " INTEGER NOT NULL,"
                 + "UNIQUE (" + SeriesContract.SerieEntry.NOMBRE + "))");
     }
@@ -71,7 +70,6 @@ public class GestionDBSeries extends SQLiteOpenHelper {
         return db.update(SeriesContract.SerieEntry.TABLE_NAME, cv, SeriesContract.SerieEntry.NOMBRE + "= '" + serie.getNombre() + "'", null);
 
     }
-
 
 
 }
