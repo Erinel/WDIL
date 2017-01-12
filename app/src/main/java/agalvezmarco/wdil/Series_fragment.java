@@ -146,7 +146,7 @@ public class Series_fragment extends Fragment {
         return rootView;
     }
 
-
+    //Asigna los valores al campo de texto para rellenar.
     private void asignarValoresAutocomplete() {
         series = db.recuperarDatos();
 
