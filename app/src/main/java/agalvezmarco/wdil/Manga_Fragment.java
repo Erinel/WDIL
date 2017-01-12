@@ -1,8 +1,10 @@
 package agalvezmarco.wdil;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -23,8 +25,9 @@ import java.util.ArrayList;
  */
 
 public class Manga_Fragment extends Fragment {
-    private GestionDBManga db;
-    private ArrayList<Serie> mangas;
+
+    private GestionDBSeries db;
+    private ArrayList<Manga> mangas;
     private AutoCompleteTextView entrada;
     private String[] nombres;
     private FloatingActionButton fab;
@@ -38,18 +41,19 @@ public class Manga_Fragment extends Fragment {
         // Required empty public constructor
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.manga_fragment, container, false);
-        //db = new GestionDBSeries(getContext());
-        entrada = (AutoCompleteTextView) rootView.findViewById(R.id.autoCompletarSeries);
+        db = new GestionDBSeries(getContext());
+        entrada = (AutoCompleteTextView) rootView.findViewById(R.id.autoCompletarManga);
         asignarValoresAutocomplete();
         fab = (FloatingActionButton) rootView.findViewById(R.id.nuevoManga);
         capituloTexto = (TextView) rootView.findViewById(R.id.textCap);
         addCapitulo = (Button) rootView.findViewById(R.id.addCapM);
-        minusCapitulo = (Button) rootView.findViewById(R.id.sustractCap);
+        minusCapitulo = (Button) rootView.findViewById(R.id.sustractCapM);
         estadoBotones(false);
 
         entrada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,7 +87,7 @@ public class Manga_Fragment extends Fragment {
                 for(int i = 0; i < mangas.size(); i++) {
                     if(entrada.getText().toString().equals(mangas.get(i).getNombre())) {
                         mangas.get(i).setCapitulo(mangas.get(i).getCapitulo() + 1);
-                        //db.updateSerie(mangas.get(i));
+                        db.updateManga(mangas.get(i));
                         capituloTexto.setText("" +mangas.get(i).getCapitulo());
                     }
                 }
@@ -97,7 +101,7 @@ public class Manga_Fragment extends Fragment {
                 for(int i = 0; i < mangas.size(); i++) {
                     if(entrada.getText().toString().equals(mangas.get(i).getNombre())) {
                         mangas.get(i).setCapitulo(mangas.get(i).getCapitulo() - 1);
-                        db.updateSerie(mangas.get(i));
+                        db.updateManga(mangas.get(i));
                         capituloTexto.setText("" +mangas.get(i).getCapitulo());
                     }
                 }
@@ -110,7 +114,7 @@ public class Manga_Fragment extends Fragment {
 
     //Asigna los valores al campo de texto para rellenar.
     private void asignarValoresAutocomplete() {
-        mangas = db.recuperarDatos();
+        mangas = db.recuperarDatosManga();
 
         nombres = new String[mangas.size()];
         for (int i = 0; i < nombres.length; i++) {
@@ -126,17 +130,16 @@ public class Manga_Fragment extends Fragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View v = inflater.inflate(R.layout.dialognuevaserie, null);
+        View v = inflater.inflate(R.layout.dialognuevomanga, null);
 
-        final EditText nombre = (EditText) v.findViewById(R.id.nombreNuevo);
-        final EditText temporada = (EditText) v.findViewById(R.id.temporadaNuevo);
-        final EditText capitulo = (EditText) v.findViewById(R.id.capituloNuevo);
+        final EditText nombre = (EditText) v.findViewById(R.id.nombreNuevoM);
+        final EditText capitulo = (EditText) v.findViewById(R.id.capituloNuevoM);
         builder.setView(v);
 
         builder.setPositiveButton("Crear!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Serie aux = new Serie();
+                Manga aux = new Manga();
                 if (!(nombre.getText() == null) && !(nombre.getText().toString().equals("")))
                     aux.setNombre(nombre.getText().toString());
 
@@ -145,14 +148,12 @@ public class Manga_Fragment extends Fragment {
                     puedoGuardar = false;
                     dialog.dismiss();
                 }
-                if (!(temporada.getText() == null) && !(temporada.getText().toString().equals("")))
-                    aux.setTemporada(Integer.parseInt(temporada.getText().toString()));
-                else aux.setTemporada(0);
+
                 if (!(capitulo.getText() == null) && !(capitulo.getText().toString().equals("")))
                     aux.setCapitulo(Integer.parseInt(capitulo.getText().toString()));
                 else aux.setCapitulo(0);
                 if (puedoGuardar) {
-                    db.guardarSerie(aux);
+                    db.guardarManga(aux);
                     asignarValoresAutocomplete();
                 }
                 dialog.dismiss();

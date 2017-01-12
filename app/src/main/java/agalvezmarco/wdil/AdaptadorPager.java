@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class AdaptadorPager extends FragmentPagerAdapter {
 
-    private int PAGE_COUNT = 1;
-    private String tabTitles[] = new String[] {"Series"};
+    private int PAGE_COUNT = 2;
+    private String tabTitles[] = new String[] {"Series", "Manga"};
 
     public AdaptadorPager(FragmentManager f) {
         super(f);
@@ -20,10 +20,10 @@ public class AdaptadorPager extends FragmentPagerAdapter {
             case 0:
                 f = new Series_fragment();
                 break;
-            /*case 1:
-                f = new Manga_fragment();
+            case 1:
+                f = new Manga_Fragment();
                 break;
-            case 2:
+            /*case 2:
                 f = new Fragment3();
                 break;*/
         }
