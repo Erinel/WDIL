@@ -9,4 +9,5 @@
     <string name="temporadanuevo">Temporada actual: </string>
     <string name="capitulonuevo">Capitulo actual: </string>
     <string name="enterManga">Introduce un manga.</string>
+    <string name="listaSeries">Toca aqui para ver todas tus series guardadas.</string>
 </resources>

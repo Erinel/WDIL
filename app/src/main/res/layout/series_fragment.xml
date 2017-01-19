@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/degradadobackground"
     android:orientation="vertical"
-    android:padding="16dp"
-    >
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,8 +17,8 @@
             android:layout_height="40dp"
             android:layout_marginTop="100dp"
             android:hint="@string/enterSerie"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,26 +31,24 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:text="@string/season"
                 android:background="#00000000"
-                android:textColor="#FFFFFF"
+                android:text="@string/season"
                 android:textAlignment="center"
-                android:textStyle="bold"
+                android:textColor="#FFFFFF"
                 android:textSize="20dp"
-                />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/cap"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:text="@string/cap"
                 android:background="#00000000"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
+                android:text="@string/cap"
                 android:textAlignment="center"
+                android:textColor="#FFFFFF"
                 android:textSize="20dp"
-                />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -67,10 +64,10 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="#00000000"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
                 android:textSize="30dp"
-                android:textAlignment="center"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textCap"
@@ -78,64 +75,79 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="#00000000"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
                 android:textSize="30dp"
-                android:textAlignment="center"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
-            <TableRow >
+            <TableRow>
 
                 <Button
                     android:id="@+id/sustractSeason"
                     android:layout_width="40dp"
-                    android:layout_weight="1"
                     android:layout_height="40dp"
+                    android:layout_weight="1"
                     android:text="@string/bajar"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/addSeason"
                     android:layout_width="40dp"
-                    android:layout_weight="1"
                     android:layout_height="40dp"
+                    android:layout_weight="1"
                     android:text="@string/subir"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/sustractCap"
-                    android:layout_weight="1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_weight="1"
                     android:text="@string/bajar"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/addCap"
-                    android:layout_weight="1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_weight="1"
                     android:text="@string/subir"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
             </TableRow>
         </TableLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/allSeries"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:text="@string/listaSeries"/>
+
+        </ScrollView>
     </LinearLayout>
 
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/nuevaSerie"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="20dp"
-        android:src="@mipmap/newentry"
-        android:id="@+id/nuevaSerie"/>
+        android:src="@mipmap/newentry" />
 
 </FrameLayout>

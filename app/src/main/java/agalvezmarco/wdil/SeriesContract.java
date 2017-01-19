@@ -26,4 +26,5 @@ public class SeriesContract {
         public static final String CAPITULO = "capitulo";
 
     }
+
 }

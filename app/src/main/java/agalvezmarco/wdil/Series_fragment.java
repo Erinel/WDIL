@@ -39,6 +39,7 @@ public class Series_fragment extends Fragment {
     private Button minusTemporada;
     private Button addCapitulo;
     private Button minusCapitulo;
+    private TextView listaSeries;
 
 
     public Series_fragment() {
@@ -60,6 +61,7 @@ public class Series_fragment extends Fragment {
         addTemporada = (Button) rootView.findViewById(R.id.addSeason);
         minusTemporada = (Button) rootView.findViewById(R.id.sustractSeason);
         minusCapitulo = (Button) rootView.findViewById(R.id.sustractCap);
+        listaSeries = (TextView) rootView.findViewById(R.id.allSeries);
         estadoBotones(false);
 
         entrada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -140,6 +142,29 @@ public class Series_fragment extends Fragment {
                         temporadaTexto.setText("" +series.get(i).getTemporada());
                     }
                 }
+            }
+        });
+
+        listaSeries.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mostrar = "";
+                if(!series.isEmpty()) {
+
+                    for (Serie s : series) {
+
+                        mostrar += s.getNombre() + ": (T" + s.getTemporada() + ", Cp" + s.getCapitulo() + ") \n";
+
+                    }
+                }
+
+                else {
+
+                    mostrar = "Aun no has introducido ninguna serie!";
+
+                }
+                listaSeries.setText("");
+                listaSeries.setText(mostrar);
             }
         });
 
