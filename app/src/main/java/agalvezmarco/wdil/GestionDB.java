@@ -39,8 +39,8 @@ public class GestionDB extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + DBContract.LibroEntry.TABLE_NAME + "("
                 + DBContract.LibroEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + DBContract.LibroEntry.NOMBRE + " TEXT NOT NULL,"
-                + DBContract.LibroEntry.PAGACTUAL + " INTEGER NOT NULL"
-                + DBContract.LibroEntry.PAGTOTALES + " INTEGER"
+                + DBContract.LibroEntry.PAGACTUAL + " INTEGER NOT NULL,"
+                + DBContract.LibroEntry.PAGTOTALES + " INTEGER, "
                 + "UNIQUE (" + DBContract.LibroEntry.NOMBRE + "))");
     }
 
