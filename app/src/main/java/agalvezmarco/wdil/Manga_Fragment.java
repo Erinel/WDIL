@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class Manga_Fragment extends Fragment {
 
-    private GestionDBSeries db;
+    private GestionDB db;
     private ArrayList<Manga> mangas;
     private AutoCompleteTextView entrada;
     private String[] nombres;
@@ -47,7 +47,7 @@ public class Manga_Fragment extends Fragment {
                              Bundle savedInstanceState) {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.manga_fragment, container, false);
-        db = new GestionDBSeries(getContext());
+        db = new GestionDB(getContext());
         entrada = (AutoCompleteTextView) rootView.findViewById(R.id.autoCompletarManga);
         asignarValoresAutocomplete();
         fab = (FloatingActionButton) rootView.findViewById(R.id.nuevoManga);

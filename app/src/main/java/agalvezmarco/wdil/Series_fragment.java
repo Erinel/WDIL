@@ -17,8 +17,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 /**
@@ -27,7 +25,7 @@ import java.util.ArrayList;
 
 public class Series_fragment extends Fragment {
 
-    private GestionDBSeries db;
+    private GestionDB db;
     private ArrayList<Serie> series;
     private AutoCompleteTextView entrada;
     private String[] nombres;
@@ -51,7 +49,7 @@ public class Series_fragment extends Fragment {
                              Bundle savedInstanceState) {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.series_fragment, container, false);
-        db = new GestionDBSeries(getContext());
+        db = new GestionDB(getContext());
         entrada = (AutoCompleteTextView) rootView.findViewById(R.id.autoCompletarSeries);
         asignarValoresAutocomplete();
         fab = (FloatingActionButton) rootView.findViewById(R.id.nuevaSerie);

@@ -9,5 +9,9 @@
     <string name="temporadanuevo">Temporada actual: </string>
     <string name="capitulonuevo">Capitulo actual: </string>
     <string name="enterManga">Introduce un manga.</string>
+    <string name="mangaNuevo">Nombre del manga/comic: </string>
     <string name="listaSeries">Toca aqui para ver todas tus series guardadas.</string>
+    <string name="pagActual">Introduce tu pagina actual: </string>
+    <string name="enterLibro">Introduce un libro: </string>
+    <string name="pagTotales">Introduce sus paginas totales (opcional): </string>
 </resources>

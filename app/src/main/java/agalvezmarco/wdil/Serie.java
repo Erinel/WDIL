@@ -26,9 +26,9 @@ public class Serie {
 
     public ContentValues toContentValues() {
         ContentValues cv = new ContentValues();
-        cv.put(SeriesContract.SerieEntry.NOMBRE, nombre);
-        cv.put(SeriesContract.SerieEntry.TEMPORADA, temporada);
-        cv.put(SeriesContract.SerieEntry.CAPITULO, capitulo);
+        cv.put(DBContract.SerieEntry.NOMBRE, nombre);
+        cv.put(DBContract.SerieEntry.TEMPORADA, temporada);
+        cv.put(DBContract.SerieEntry.CAPITULO, capitulo);
         return cv;
     }
 

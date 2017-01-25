@@ -28,8 +28,8 @@ public class Manga {
 
     public ContentValues toContentValues() {
         ContentValues cv = new ContentValues();
-        cv.put(SeriesContract.MangaEntry.NOMBRE, nombre);
-        cv.put(SeriesContract.MangaEntry.CAPITULO, capitulo);
+        cv.put(DBContract.MangaEntry.NOMBRE, nombre);
+        cv.put(DBContract.MangaEntry.CAPITULO, capitulo);
         return cv;
     }
 

@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
  * Created by aleja on 20/12/2016.
  */
 
-public class SeriesContract {
+public class DBContract {
 
     public static abstract class SerieEntry implements BaseColumns {
         public static final String TABLE_NAME ="serie";
@@ -20,10 +20,19 @@ public class SeriesContract {
     public static abstract class MangaEntry implements BaseColumns {
 
         public static final String TABLE_NAME ="manga";
-
         public static final String _ID = "id";
         public static final String NOMBRE = "nombre";
         public static final String CAPITULO = "capitulo";
+
+    }
+
+    public static abstract class LibroEntry implements BaseColumns {
+
+        public static final String TABLE_NAME = "libro";
+        public static final String _ID = "id";
+        public static final String NOMBRE = "nombre";
+        public static final String PAGACTUAL = "pagActual";
+        public static final String PAGTOTALES = "pagTotales";
 
     }
 

@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/mangaNuevo"
+        android:text="@string/enterLibro"
         android:layout_gravity="center"
         android:textAlignment="center"/>
 
@@ -15,20 +15,35 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_gravity="center"
-        android:id="@+id/nombreNuevoM"
+        android:id="@+id/nombreLibro"
         android:inputType="text"/>
 
     <TextView
         android:layout_width="150dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
         android:layout_height="wrap_content"
-        android:text="@string/capitulonuevo"
+        android:text="@string/pagActual"/>
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/pagActualD"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:inputType="number"/>
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/pagTotales"
         android:textAlignment="center"
         android:layout_gravity="center"/>
 
     <EditText
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:id="@+id/capituloNuevoM"
+        android:id="@+id/pagTotalD"
         android:inputType="number"
         android:textAlignment="center"
         android:layout_gravity="center"/>
