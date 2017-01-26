@@ -14,4 +14,7 @@
     <string name="pagActual">Introduce tu pagina actual: </string>
     <string name="enterLibro">Introduce un libro: </string>
     <string name="pagTotales">Introduce sus paginas totales (opcional): </string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="enterEmail">Introduce e-mail:</string>
+    <string name="enterPass">Introduce contraseña: </string>
 </resources>
