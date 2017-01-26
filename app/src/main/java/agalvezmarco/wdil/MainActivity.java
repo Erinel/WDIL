@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
@@ -31,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabsBar);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void onDestroy() {
+
+        FirebaseAuth.getInstance().signOut();
+
     }
 
     @Override

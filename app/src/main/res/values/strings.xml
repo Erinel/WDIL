@@ -17,4 +17,6 @@
     <string name="title_activity_login">Sign in</string>
     <string name="enterEmail">Introduce e-mail:</string>
     <string name="enterPass">Introduce contraseña: </string>
+    <string name="enterNewPass">Introduce nueva contraseña: </string>
+    <string name="enterNick">Introduce nuevo nick: </string>
 </resources>
