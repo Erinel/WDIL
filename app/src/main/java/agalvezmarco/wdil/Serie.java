@@ -24,13 +24,6 @@ public class Serie {
 
     }
 
-    public ContentValues toContentValues() {
-        ContentValues cv = new ContentValues();
-        cv.put(DBContract.SerieEntry.NOMBRE, nombre);
-        cv.put(DBContract.SerieEntry.TEMPORADA, temporada);
-        cv.put(DBContract.SerieEntry.CAPITULO, capitulo);
-        return cv;
-    }
 
     public String getNombre() {
         return nombre;

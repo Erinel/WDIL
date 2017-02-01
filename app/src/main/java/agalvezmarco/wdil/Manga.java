@@ -26,12 +26,7 @@ public class Manga {
         this.nombre = nombre;
     }
 
-    public ContentValues toContentValues() {
-        ContentValues cv = new ContentValues();
-        cv.put(DBContract.MangaEntry.NOMBRE, nombre);
-        cv.put(DBContract.MangaEntry.CAPITULO, capitulo);
-        return cv;
-    }
+
 
     private int capitulo;
 

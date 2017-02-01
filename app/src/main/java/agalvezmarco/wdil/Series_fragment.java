@@ -25,7 +25,6 @@ import java.util.ArrayList;
 
 public class Series_fragment extends Fragment {
 
-    private GestionDB db;
     private ArrayList<Serie> series;
     private AutoCompleteTextView entrada;
     private String[] nombres;
@@ -38,6 +37,7 @@ public class Series_fragment extends Fragment {
     private Button addCapitulo;
     private Button minusCapitulo;
     private TextView listaSeries;
+    private Usuario usuario;
 
 
     public Series_fragment() {
@@ -49,7 +49,6 @@ public class Series_fragment extends Fragment {
                              Bundle savedInstanceState) {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.series_fragment, container, false);
-        db = new GestionDB(getContext());
         entrada = (AutoCompleteTextView) rootView.findViewById(R.id.autoCompletarSeries);
         asignarValoresAutocomplete();
         fab = (FloatingActionButton) rootView.findViewById(R.id.nuevaSerie);
@@ -61,6 +60,7 @@ public class Series_fragment extends Fragment {
         minusCapitulo = (Button) rootView.findViewById(R.id.sustractCap);
         listaSeries = (TextView) rootView.findViewById(R.id.allSeries);
         estadoBotones(false);
+        usuario.getUsuario();
 
         entrada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,7 +94,7 @@ public class Series_fragment extends Fragment {
                 for(int i = 0; i < series.size(); i++) {
                     if(entrada.getText().toString().equals(series.get(i).getNombre())) {
                         series.get(i).setCapitulo(series.get(i).getCapitulo() + 1);
-                        db.updateSerie(series.get(i));
+                        usuario.setSeries(series);
                         capituloTexto.setText("" +series.get(i).getCapitulo());
                     }
                 }
@@ -108,7 +108,7 @@ public class Series_fragment extends Fragment {
                 for(int i = 0; i < series.size(); i++) {
                     if(entrada.getText().toString().equals(series.get(i).getNombre())) {
                         series.get(i).setCapitulo(series.get(i).getCapitulo() - 1);
-                        db.updateSerie(series.get(i));
+                        usuario.setSeries(series);
                         capituloTexto.setText("" +series.get(i).getCapitulo());
                     }
                 }
@@ -122,7 +122,7 @@ public class Series_fragment extends Fragment {
                 for(int i = 0; i < series.size(); i++) {
                     if(entrada.getText().toString().equals(series.get(i).getNombre())) {
                         series.get(i).setTemporada(series.get(i).getTemporada() + 1);
-                        db.updateSerie(series.get(i));
+                        usuario.setSeries(series);
                         temporadaTexto.setText("" +series.get(i).getTemporada());
                     }
                 }
@@ -136,7 +136,7 @@ public class Series_fragment extends Fragment {
                 for(int i = 0; i < series.size(); i++) {
                     if(entrada.getText().toString().equals(series.get(i).getNombre())) {
                         series.get(i).setTemporada(series.get(i).getTemporada() - 1);
-                        db.updateSerie(series.get(i));
+                        usuario.setSeries(series);
                         temporadaTexto.setText("" +series.get(i).getTemporada());
                     }
                 }
@@ -171,7 +171,7 @@ public class Series_fragment extends Fragment {
 
     //Asigna los valores al campo de texto para rellenar.
     private void asignarValoresAutocomplete() {
-        series = db.recuperarDatos();
+        series = Usuario.getUsuario().getSeries();
 
         nombres = new String[series.size()];
         for (int i = 0; i < nombres.length; i++) {
@@ -213,8 +213,8 @@ public class Series_fragment extends Fragment {
                     aux.setCapitulo(Integer.parseInt(capitulo.getText().toString()));
                 else aux.setCapitulo(0);
                 if (puedoGuardar) {
-                    db.guardarSerie(aux);
                     asignarValoresAutocomplete();
+                    usuario.setSeries(series);
                 }
                 dialog.dismiss();
             }
@@ -243,5 +243,7 @@ public class Series_fragment extends Fragment {
         minusCapitulo.setVisibility(estado);
         minusTemporada.setVisibility(estado);
     }
+
+
 }
 

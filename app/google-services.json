@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "440243521653-6gvjkipepv2i0mk7l705pt98mi6rngre.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "agalvezmarco.wdil",
-            "certificate_hash": "DE3447CA821C45AB1918D1F304E25C83DFEBBB83"
-          }
-        },
-        {
           "client_id": "440243521653-t1fk36sd1iv076ol5u9jgq9jfcuhg14r.apps.googleusercontent.com",
           "client_type": 3
         }
