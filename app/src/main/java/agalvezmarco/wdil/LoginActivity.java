@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 signIn(mail, password);
-                finish();
+
             }
         });
 
@@ -103,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void createAccount(String email, String password) {
 
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -119,8 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                             String uid = user.getUid();
                             mDatabase.child("users").child(uid).setValue(user);
                             mDatabase.child("users").child(uid).child("nick").setValue(nickS);
-
-                            cargarDatosUsuario();
+                            finish();
                         }
 
                         // ...
@@ -136,9 +134,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
                             Toast.makeText(getApplicationContext(), "Ha fallado la autenticacion.",
@@ -150,7 +145,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 });
     }
-
 
     private AlertDialog crearDialogoNuevoUsuario() {
 
@@ -219,7 +213,6 @@ public class LoginActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null)
-
         {
             String uid = user.getUid();
             mDatabase.child("users").child(uid).addListenerForSingleValueEvent(
@@ -229,6 +222,7 @@ public class LoginActivity extends AppCompatActivity {
                             Usuario.getUsuario().setSeries((ArrayList<Serie>) dataSnapshot.child("series").getValue());
                             Usuario.getUsuario().setMangas((ArrayList<Manga>) dataSnapshot.child("mangas").getValue());
                             Usuario.getUsuario().setLibros((ArrayList<Libro>) dataSnapshot.child("libros").getValue());
+
                         }
 
                         @Override

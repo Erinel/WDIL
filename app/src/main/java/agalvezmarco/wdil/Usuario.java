@@ -26,13 +26,6 @@ public class Usuario {
         libros = new ArrayList<>();
     }
 
-    private Usuario(String email, String nick) {
-        this.email = email;
-        this.nick = nick;
-        series = new ArrayList<>();
-        mangas = new ArrayList<>();
-        libros = new ArrayList<>();
-    }
 
     public String getEmail() {
         return email;

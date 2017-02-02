@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
             mDatabase.child("users").child(uid).child("series").setValue(Usuario.getUsuario().getSeries());
             mDatabase.child("users").child(uid).child("mangas").setValue(Usuario.getUsuario().getMangas());
             mDatabase.child("users").child(uid).child("libros").setValue(Usuario.getUsuario().getLibros());
+
         }
+        FirebaseAuth.getInstance().signOut();
     }
 }

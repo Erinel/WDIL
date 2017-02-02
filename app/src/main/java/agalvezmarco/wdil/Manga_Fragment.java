@@ -112,7 +112,6 @@ public class Manga_Fragment extends Fragment {
     //Asigna los valores al campo de texto para rellenar.
     private void asignarValoresAutocomplete() {
 
-
         nombres = new String[mangas.size()];
         for (int i = 0; i < nombres.length; i++) {
             nombres[i] = mangas.get(i).getNombre();

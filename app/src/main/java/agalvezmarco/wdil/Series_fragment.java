@@ -154,11 +154,8 @@ public class Series_fragment extends Fragment {
 
                     }
                 }
-
                 else {
-
                     mostrar = "Aun no has introducido ninguna serie!";
-
                 }
                 listaSeries.setText("");
                 listaSeries.setText(mostrar);
