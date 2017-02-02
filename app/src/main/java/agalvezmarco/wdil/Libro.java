@@ -57,14 +57,5 @@ public class Libro {
 
     }
 
-    public ContentValues toContentValues() {
-
-        ContentValues ret = new ContentValues();
-        ret.put(DBContract.LibroEntry.NOMBRE, nombre);
-        ret.put(DBContract.LibroEntry.PAGACTUAL, pagActual);
-        ret.put(DBContract.LibroEntry.PAGTOTALES, pagTotales);
-        return ret;
-
-    }
 
 }

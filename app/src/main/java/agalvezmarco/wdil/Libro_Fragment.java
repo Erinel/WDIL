@@ -24,20 +24,24 @@ public class Libro_Fragment extends Fragment {
     private ListView lista;
     private ArrayList<Libro> datos;
     private FloatingActionButton fab;
-    private GestionDB db;
     private AdaptadorLibros adaptador;
     private boolean puedoGuardar = true;
+    private Usuario usuario;
+
+    public ArrayList<Libro> recuperarDatos() {
+        return datos;
+    }
 
     public Libro_Fragment() {
 
     }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.libro_fragment, container, false);
-        db = new GestionDB(getContext());
         datos = new ArrayList<>();
-        datos = db.recuperarDatosLibro();
-
+        datos = Usuario.getUsuario().getLibros();
+        usuario.getUsuario();
         lista = (ListView) rootView.findViewById(R.id.listLibros);
 
         rellenarLista();
@@ -90,8 +94,9 @@ public class Libro_Fragment extends Fragment {
                 else aux.setPagTotales(0);
 
                 if (puedoGuardar) {
-                    db.guardarLibro(aux);
+
                     datos.add(aux);
+                    usuario.setLibros(datos);
                     rellenarLista();
                 }
                 dialog.dismiss();

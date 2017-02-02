@@ -18,9 +18,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import static agalvezmarco.wdil.Usuario.getUsuario;
 
 public class LoginActivity extends AppCompatActivity {
-
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -33,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private String passS;
     private boolean puedoGuardar = true;
     private static final String TAG = "firebase";
+    private DatabaseReference mDatabase;
 
 
     @Override
@@ -80,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               crearDialogoNuevoUsuario().show();
+                crearDialogoNuevoUsuario().show();
             }
         });
     }
@@ -100,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-   public void createAccount(String email, String password) {
+    public void createAccount(String email, String password) {
 
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -109,12 +116,13 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Ha fallado la autenticacion.",
                                     Toast.LENGTH_SHORT).show();
+                        } else {
+                            mDatabase = FirebaseDatabase.getInstance().getReference();
+                            Usuario user = getUsuario(emailS, nickS);;
+                            mDatabase.child("users").push().setValue(user);
                         }
 
                         // ...
@@ -137,27 +145,14 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithEmail", task.getException());
                             Toast.makeText(getApplicationContext(), "Ha fallado la autenticacion.",
                                     Toast.LENGTH_SHORT).show();
+                        } else {
+                            cargarDatosUsuario();
                         }
-
-                        // ...
                     }
 
                 });
     }
 
-    /*
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-if (user != null) {
-    // Name, email address, and profile photo Url
-    String name = user.getDisplayName();
-    String email = user.getEmail();
-    Uri photoUrl = user.getPhotoUrl();
-
-    // The user's ID, unique to the Firebase project. Do NOT use this value to
-    // authenticate with your backend server, if you have one. Use
-    // FirebaseUser.getToken() instead.
-    String uid = user.getUid();
-}    */
 
     private AlertDialog crearDialogoNuevoUsuario() {
 
@@ -196,7 +191,7 @@ if (user != null) {
                 }
 
                 if (!(contraseña.getText() == null) && (!contraseña.getText().toString().equals("")))
-                   passS = contraseña.getText().toString();
+                    passS = contraseña.getText().toString();
 
                 else {
                     Toast.makeText(getApplicationContext(), "No has introducido contraseña, saliendo.", Toast.LENGTH_LONG);
@@ -220,4 +215,35 @@ if (user != null) {
 
         return builder.create();
     }
+
+    private void cargarDatosUsuario() {
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null)
+
+        {
+            String uid = user.getUid();
+            mDatabase.child("users").child(uid).addListenerForSingleValueEvent(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                          Usuario.getUsuario().setUsuario(dataSnapshot.getValue(Usuario.class));
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+
+                        }
+                    });
+
+
+        }
+
+    }
+
+
+
 }
