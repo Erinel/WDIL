@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
-/**
- * Created by aleja on 19/12/2016.
- */
 
 public class Series_fragment extends Fragment {
 
@@ -37,7 +34,6 @@ public class Series_fragment extends Fragment {
     private Button addCapitulo;
     private Button minusCapitulo;
     private TextView listaSeries;
-    private Usuario usuario;
 
 
     public Series_fragment() {
@@ -50,6 +46,8 @@ public class Series_fragment extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.series_fragment, container, false);
         entrada = (AutoCompleteTextView) rootView.findViewById(R.id.autoCompletarSeries);
+        series = Usuario.getUsuario().getSeries();
+        if(!series.isEmpty())
         asignarValoresAutocomplete();
         fab = (FloatingActionButton) rootView.findViewById(R.id.nuevaSerie);
         temporadaTexto = (TextView) rootView.findViewById(R.id.textSeason);
@@ -60,7 +58,7 @@ public class Series_fragment extends Fragment {
         minusCapitulo = (Button) rootView.findViewById(R.id.sustractCap);
         listaSeries = (TextView) rootView.findViewById(R.id.allSeries);
         estadoBotones(false);
-        usuario.getUsuario();
+
 
         entrada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,7 +92,7 @@ public class Series_fragment extends Fragment {
                 for(int i = 0; i < series.size(); i++) {
                     if(entrada.getText().toString().equals(series.get(i).getNombre())) {
                         series.get(i).setCapitulo(series.get(i).getCapitulo() + 1);
-                        usuario.setSeries(series);
+                        Usuario.getUsuario().setSeries(series);
                         capituloTexto.setText("" +series.get(i).getCapitulo());
                     }
                 }
@@ -108,7 +106,7 @@ public class Series_fragment extends Fragment {
                 for(int i = 0; i < series.size(); i++) {
                     if(entrada.getText().toString().equals(series.get(i).getNombre())) {
                         series.get(i).setCapitulo(series.get(i).getCapitulo() - 1);
-                        usuario.setSeries(series);
+                        Usuario.getUsuario().setSeries(series);
                         capituloTexto.setText("" +series.get(i).getCapitulo());
                     }
                 }
@@ -122,7 +120,7 @@ public class Series_fragment extends Fragment {
                 for(int i = 0; i < series.size(); i++) {
                     if(entrada.getText().toString().equals(series.get(i).getNombre())) {
                         series.get(i).setTemporada(series.get(i).getTemporada() + 1);
-                        usuario.setSeries(series);
+                        Usuario.getUsuario().setSeries(series);
                         temporadaTexto.setText("" +series.get(i).getTemporada());
                     }
                 }
@@ -136,7 +134,8 @@ public class Series_fragment extends Fragment {
                 for(int i = 0; i < series.size(); i++) {
                     if(entrada.getText().toString().equals(series.get(i).getNombre())) {
                         series.get(i).setTemporada(series.get(i).getTemporada() - 1);
-                        usuario.setSeries(series);
+                        Usuario.getUsuario().setSeries(series);
+                        Log.d("salida", Usuario.getUsuario().getSeries().toString());
                         temporadaTexto.setText("" +series.get(i).getTemporada());
                     }
                 }
@@ -171,7 +170,6 @@ public class Series_fragment extends Fragment {
 
     //Asigna los valores al campo de texto para rellenar.
     private void asignarValoresAutocomplete() {
-        series = Usuario.getUsuario().getSeries();
 
         nombres = new String[series.size()];
         for (int i = 0; i < nombres.length; i++) {
@@ -212,9 +210,11 @@ public class Series_fragment extends Fragment {
                 if (!(capitulo.getText() == null) && !(capitulo.getText().toString().equals("")))
                     aux.setCapitulo(Integer.parseInt(capitulo.getText().toString()));
                 else aux.setCapitulo(0);
+
                 if (puedoGuardar) {
+                    series.add(aux);
+                    Usuario.getUsuario().setSeries(series);
                     asignarValoresAutocomplete();
-                    usuario.setSeries(series);
                 }
                 dialog.dismiss();
             }
@@ -243,6 +243,7 @@ public class Series_fragment extends Fragment {
         minusCapitulo.setVisibility(estado);
         minusTemporada.setVisibility(estado);
     }
+
 
 
 }

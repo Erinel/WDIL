@@ -44,12 +44,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy() {
-
-        FirebaseAuth.getInstance().signOut();
+    public void onStop() {
         guardarDatosUsuario();
-
+        super.onStop();
     }
+
+    @Override
+    public void onDestroy() {
+        guardarDatosUsuario();
+        super.onDestroy();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,15 +74,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void guardarDatosUsuario() {
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null)
-
         {
             String uid = user.getUid();
-            DatabaseReference  mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("users").child(uid).setValue(Usuario.getUsuario());
-
-
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("users").child(uid).child("series").setValue(Usuario.getUsuario().getSeries());
+            mDatabase.child("users").child(uid).child("mangas").setValue(Usuario.getUsuario().getMangas());
+            mDatabase.child("users").child(uid).child("libros").setValue(Usuario.getUsuario().getLibros());
         }
     }
 }

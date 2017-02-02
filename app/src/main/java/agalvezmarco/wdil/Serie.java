@@ -1,10 +1,5 @@
 package agalvezmarco.wdil;
 
-import android.content.ContentValues;
-
-/**
- * Created by aleja on 20/12/2016.
- */
 
 public class Serie {
 
@@ -48,4 +43,6 @@ public class Serie {
     public void setCapitulo(int capitulo) {
         this.capitulo = capitulo;
     }
+
+
 }

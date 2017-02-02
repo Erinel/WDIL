@@ -20,9 +20,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/**
- * Created by aleja on 12/01/2017.
- */
 
 public class Manga_Fragment extends Fragment {
 
@@ -34,7 +31,6 @@ public class Manga_Fragment extends Fragment {
     private TextView capituloTexto;
     private Button addCapitulo;
     private Button minusCapitulo;
-    private Usuario usuario;
 
 
     public Manga_Fragment() {
@@ -48,13 +44,14 @@ public class Manga_Fragment extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.manga_fragment, container, false);
         entrada = (AutoCompleteTextView) rootView.findViewById(R.id.autoCompletarManga);
+        mangas = Usuario.getUsuario().getMangas();
+        if(!mangas.isEmpty())
         asignarValoresAutocomplete();
         fab = (FloatingActionButton) rootView.findViewById(R.id.nuevoManga);
         capituloTexto = (TextView) rootView.findViewById(R.id.textCap);
         addCapitulo = (Button) rootView.findViewById(R.id.addCapM);
         minusCapitulo = (Button) rootView.findViewById(R.id.sustractCapM);
         estadoBotones(false);
-        usuario.getUsuario();
 
         entrada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,7 +85,7 @@ public class Manga_Fragment extends Fragment {
                     if(entrada.getText().toString().equals(mangas.get(i).getNombre())) {
                         mangas.get(i).setCapitulo(mangas.get(i).getCapitulo() + 1);
                         capituloTexto.setText("" +mangas.get(i).getCapitulo());
-                        usuario.setMangas(mangas);
+                       Usuario.getUsuario().setMangas(mangas);
                     }
                 }
             }
@@ -101,7 +98,7 @@ public class Manga_Fragment extends Fragment {
                 for(int i = 0; i < mangas.size(); i++) {
                     if(entrada.getText().toString().equals(mangas.get(i).getNombre())) {
                         mangas.get(i).setCapitulo(mangas.get(i).getCapitulo() - 1);
-                        usuario.setMangas(mangas);
+                        Usuario.getUsuario().setMangas(mangas);
                         capituloTexto.setText("" +mangas.get(i).getCapitulo());
                     }
                 }
@@ -114,7 +111,7 @@ public class Manga_Fragment extends Fragment {
 
     //Asigna los valores al campo de texto para rellenar.
     private void asignarValoresAutocomplete() {
-        mangas = Usuario.getUsuario().getMangas();
+
 
         nombres = new String[mangas.size()];
         for (int i = 0; i < nombres.length; i++) {
@@ -154,7 +151,7 @@ public class Manga_Fragment extends Fragment {
                 else aux.setCapitulo(0);
                 if (puedoGuardar) {
                     asignarValoresAutocomplete();
-                    usuario.setMangas(mangas);
+                    Usuario.getUsuario().setMangas(mangas);
                 }
                 dialog.dismiss();
             }
@@ -178,10 +175,6 @@ public class Manga_Fragment extends Fragment {
     private void visibilidadBotones(int estado) {
         addCapitulo.setVisibility(estado);
         minusCapitulo.setVisibility(estado);
-    }
-
-    public ArrayList<Manga> recuperarDatos() {
-        return mangas;
     }
 
 }

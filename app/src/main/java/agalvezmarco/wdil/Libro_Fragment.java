@@ -15,9 +15,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/**
- * Created by aleja on 25/01/2017.
- */
 
 public class Libro_Fragment extends Fragment {
 
@@ -26,7 +23,7 @@ public class Libro_Fragment extends Fragment {
     private FloatingActionButton fab;
     private AdaptadorLibros adaptador;
     private boolean puedoGuardar = true;
-    private Usuario usuario;
+
 
     public ArrayList<Libro> recuperarDatos() {
         return datos;
@@ -41,7 +38,6 @@ public class Libro_Fragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.libro_fragment, container, false);
         datos = new ArrayList<>();
         datos = Usuario.getUsuario().getLibros();
-        usuario.getUsuario();
         lista = (ListView) rootView.findViewById(R.id.listLibros);
 
         rellenarLista();
@@ -96,7 +92,7 @@ public class Libro_Fragment extends Fragment {
                 if (puedoGuardar) {
 
                     datos.add(aux);
-                    usuario.setLibros(datos);
+                    Usuario.getUsuario().setLibros(datos);
                     rellenarLista();
                 }
                 dialog.dismiss();

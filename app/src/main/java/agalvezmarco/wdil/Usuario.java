@@ -2,9 +2,6 @@ package agalvezmarco.wdil;
 
 import java.util.ArrayList;
 
-/**
- * Created by aleja on 28/01/2017.
- */
 
 public class Usuario {
 
@@ -15,35 +12,27 @@ public class Usuario {
     private ArrayList<Serie> series;
     private static Usuario usuario;
 
-    public static Usuario getUsuario(String email, String nick){
+
+    public static Usuario getUsuario(){
         if(usuario == null) {
-            usuario = new Usuario(email, nick);
+            usuario = new Usuario();
         }
         return usuario;
     }
 
-    public static Usuario getUsuario(){
-
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-
     private Usuario() {
-
+        series = new ArrayList<>();
+        mangas = new ArrayList<>();
+        libros = new ArrayList<>();
     }
 
     private Usuario(String email, String nick) {
         this.email = email;
         this.nick = nick;
+        series = new ArrayList<>();
+        mangas = new ArrayList<>();
+        libros = new ArrayList<>();
     }
-
-
-
-    //Getters and setters
 
     public String getEmail() {
         return email;

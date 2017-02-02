@@ -24,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import static agalvezmarco.wdil.Usuario.getUsuario;
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean puedoGuardar = true;
     private static final String TAG = "firebase";
     private DatabaseReference mDatabase;
+    private FirebaseUser user;
 
 
     @Override
@@ -56,12 +57,13 @@ public class LoginActivity extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -79,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 signIn(mail, password);
-                finishActivity(0);
+                finish();
             }
         });
 
@@ -98,14 +100,6 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-
-    }
 
     public void createAccount(String email, String password) {
 
@@ -121,8 +115,12 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             mDatabase = FirebaseDatabase.getInstance().getReference();
-                            Usuario user = getUsuario(emailS, nickS);;
-                            mDatabase.child("users").push().setValue(user);
+                            user = FirebaseAuth.getInstance().getCurrentUser();
+                            String uid = user.getUid();
+                            mDatabase.child("users").child(uid).setValue(user);
+                            mDatabase.child("users").child(uid).child("nick").setValue(nickS);
+
+                            cargarDatosUsuario();
                         }
 
                         // ...
@@ -176,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                     nickS = (nick.getText().toString());
 
                 else {
-                    Toast.makeText(getApplicationContext(), "No has introducido nick, saliendo.", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "No has introducido nick, saliendo.", Toast.LENGTH_LONG).show();
                     puedoGuardar = false;
                     dialog.dismiss();
                 }
@@ -185,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
                     emailS = email.getText().toString();
 
                 else {
-                    Toast.makeText(getApplicationContext(), "No has introducido email, saliendo.", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "No has introducido email, saliendo.", Toast.LENGTH_LONG).show();
                     puedoGuardar = false;
                     dialog.dismiss();
                 }
@@ -194,7 +192,7 @@ public class LoginActivity extends AppCompatActivity {
                     passS = contraseña.getText().toString();
 
                 else {
-                    Toast.makeText(getApplicationContext(), "No has introducido contraseña, saliendo.", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "No has introducido contraseña, saliendo.", Toast.LENGTH_LONG).show();
                     puedoGuardar = false;
                     dialog.dismiss();
                 }
@@ -219,7 +217,7 @@ public class LoginActivity extends AppCompatActivity {
     private void cargarDatosUsuario() {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null)
 
         {
@@ -228,8 +226,9 @@ public class LoginActivity extends AppCompatActivity {
                     new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                          Usuario.getUsuario().setUsuario(dataSnapshot.getValue(Usuario.class));
-
+                            Usuario.getUsuario().setSeries((ArrayList<Serie>) dataSnapshot.child("series").getValue());
+                            Usuario.getUsuario().setMangas((ArrayList<Manga>) dataSnapshot.child("mangas").getValue());
+                            Usuario.getUsuario().setLibros((ArrayList<Libro>) dataSnapshot.child("libros").getValue());
                         }
 
                         @Override
@@ -243,7 +242,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
-
 
 
 }
