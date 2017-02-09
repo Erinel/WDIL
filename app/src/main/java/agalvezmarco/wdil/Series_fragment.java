@@ -48,7 +48,7 @@ public class Series_fragment extends Fragment {
         entrada = (AutoCompleteTextView) rootView.findViewById(R.id.autoCompletarSeries);
         series = Usuario.getUsuario().getSeries();
         if(!series.isEmpty())
-        asignarValoresAutocomplete();
+            asignarValoresAutocomplete();
         fab = (FloatingActionButton) rootView.findViewById(R.id.nuevaSerie);
         temporadaTexto = (TextView) rootView.findViewById(R.id.textSeason);
         capituloTexto = (TextView) rootView.findViewById(R.id.textCap);
@@ -135,7 +135,6 @@ public class Series_fragment extends Fragment {
                     if(entrada.getText().toString().equals(series.get(i).getNombre())) {
                         series.get(i).setTemporada(series.get(i).getTemporada() - 1);
                         Usuario.getUsuario().setSeries(series);
-                        Log.d("salida", Usuario.getUsuario().getSeries().toString());
                         temporadaTexto.setText("" +series.get(i).getTemporada());
                     }
                 }

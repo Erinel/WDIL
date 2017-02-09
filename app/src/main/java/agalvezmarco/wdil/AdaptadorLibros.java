@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -14,10 +15,11 @@ import java.util.ArrayList;
  * Created by aleja on 25/01/2017.
  */
 
-public class AdaptadorLibros extends ArrayAdapter<Libro> {
+public class AdaptadorLibros extends ArrayAdapter<Libro>  {
 
     private TextView titulo;
     private TextView info;
+    //private android.widget.AdapterView.OnItemClickListener listener;
 
     public AdaptadorLibros(Context context, ArrayList<Libro> datos) {
         super(context, R.layout.elem_libro, datos);
@@ -41,4 +43,14 @@ public class AdaptadorLibros extends ArrayAdapter<Libro> {
         }
         return item;
     }
+
+
+/*
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (listener != null)
+            lins
+            listener.onItemClick(parent, view, position, id);
+    }
+*/
 }

@@ -7,18 +7,10 @@ public class Serie {
     private int temporada;
     private int capitulo;
 
-    public Serie(String nombre, int temporada, int capitulo) {
-
-        this.nombre = nombre;
-        this.temporada = temporada;
-        this.capitulo = capitulo;
-
-    }
 
     public Serie() {
 
     }
-
 
     public String getNombre() {
         return nombre;

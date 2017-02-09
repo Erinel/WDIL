@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.menu.ExpandedMenuView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,10 +28,6 @@ public class Libro_Fragment extends Fragment {
     private AdaptadorLibros adaptador;
     private boolean puedoGuardar = true;
 
-
-    public ArrayList<Libro> recuperarDatos() {
-        return datos;
-    }
 
     public Libro_Fragment() {
 
@@ -113,6 +113,73 @@ public class Libro_Fragment extends Fragment {
 
         adaptador = new AdaptadorLibros(getContext(), datos);
         lista.setAdapter(adaptador);
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                crearDialogoEditarLibro(position).show();
+            }
+        });
+
     }
 
+    private AlertDialog crearDialogoEditarLibro(int position) {
+
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        View v = inflater.inflate(R.layout.dialog_editar_libro, null);
+
+        final EditText pag = (EditText) v.findViewById(R.id.pagsLibroMenu);
+        final TextView totales = (TextView) v.findViewById(R.id.totales);
+        final Button subir = (Button) v.findViewById(R.id.subirPag);
+        final Button bajar = (Button) v.findViewById(R.id.bajarPag);
+
+        final Libro pos = datos.get(position);
+        pag.setText(pos.getPagActual());
+        totales.setText("/" + pos.getPagTotales());
+
+        subir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pag.setText(Integer.parseInt(pag.getText().toString()) + 1);
+            }
+        });
+
+        bajar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pag.setText(Integer.parseInt(pag.getText().toString()) - 1);
+            }
+        });
+
+        builder.setView(v);
+
+        builder.setPositiveButton("Editar!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int index = datos.indexOf(pos);
+                Libro aux = datos.get(index);
+
+                aux.setPagActual(Integer.parseInt(pag.getText().toString()));
+                datos.remove(index);
+                datos.add(index, aux);
+
+                Usuario.getUsuario().setLibros(datos);
+                rellenarLista();
+
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("Cancelar.", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        return builder.create();
+    }
 }

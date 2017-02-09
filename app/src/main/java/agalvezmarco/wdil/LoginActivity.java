@@ -61,9 +61,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    cargarDatosUsuario();
+
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -118,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                             String uid = user.getUid();
                             mDatabase.child("users").child(uid).setValue(user);
                             mDatabase.child("users").child(uid).child("nick").setValue(nickS);
-                            finish();
+
                         }
 
                         // ...
@@ -139,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Ha fallado la autenticacion.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            cargarDatosUsuario();
+
                         }
                     }
 
@@ -212,6 +211,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("Usuario", user.getEmail());
         if (user != null)
         {
             String uid = user.getUid();
@@ -219,9 +219,11 @@ public class LoginActivity extends AppCompatActivity {
                     new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            Usuario.getUsuario().setSeries((ArrayList<Serie>) dataSnapshot.child("series").getValue());
-                            Usuario.getUsuario().setMangas((ArrayList<Manga>) dataSnapshot.child("mangas").getValue());
-                            Usuario.getUsuario().setLibros((ArrayList<Libro>) dataSnapshot.child("libros").getValue());
+                            Usuario.getUsuario().setSeries(cargarSeries(dataSnapshot));
+                            Usuario.getUsuario().setMangas(cargarMangas(dataSnapshot));
+                            Usuario.getUsuario().setLibros(cargarLibros(dataSnapshot));
+
+                           cargarInterfaz();
 
                         }
 
@@ -230,12 +232,51 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(TAG, "getUser:onCancelled", databaseError.toException());
 
                         }
+
                     });
 
 
         }
 
     }
+
+    private ArrayList<Serie> cargarSeries(DataSnapshot ds) {
+        ArrayList<Serie> series = new ArrayList<>();
+
+        for (DataSnapshot d : ds.child("series").getChildren()) {
+            Serie aux;
+            aux = d.getValue(Serie.class);
+            series.add(aux);
+        }
+        return series;
+    }
+
+    private ArrayList<Manga> cargarMangas(DataSnapshot ds) {
+        ArrayList<Manga> ret = new ArrayList<>();
+        for (DataSnapshot d : ds.child("mangas").getChildren()) {
+            Manga aux;
+            aux = d.getValue(Manga.class);
+            ret.add(aux);
+        }
+        return ret;
+    }
+
+    private ArrayList<Libro> cargarLibros(DataSnapshot ds) {
+        ArrayList<Libro> ret = new ArrayList<>();
+        for (DataSnapshot d : ds.child("libros").getChildren()) {
+            Libro aux;
+            aux = d.getValue(Libro.class);
+            ret.add(aux);
+        }
+        return ret;
+    }
+
+    private void cargarInterfaz() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
 
 }

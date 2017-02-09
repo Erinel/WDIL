@@ -149,8 +149,9 @@ public class Manga_Fragment extends Fragment {
                     aux.setCapitulo(Integer.parseInt(capitulo.getText().toString()));
                 else aux.setCapitulo(0);
                 if (puedoGuardar) {
-                    asignarValoresAutocomplete();
+                    mangas.add(aux);
                     Usuario.getUsuario().setMangas(mangas);
+                    asignarValoresAutocomplete();
                 }
                 dialog.dismiss();
             }
