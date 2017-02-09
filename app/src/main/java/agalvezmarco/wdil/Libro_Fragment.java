@@ -112,13 +112,14 @@ public class Libro_Fragment extends Fragment {
     public void rellenarLista() {
 
         adaptador = new AdaptadorLibros(getContext(), datos);
-        lista.setAdapter(adaptador);
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        adaptador.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                crearDialogoEditarLibro(position).show();
+            public void onClick(View v) {
+                crearDialogoEditarLibro(lista.getPositionForView(v)).show();
             }
         });
+        lista.setAdapter(adaptador);
+
 
     }
 

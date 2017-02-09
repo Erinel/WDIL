@@ -15,11 +15,11 @@ import java.util.ArrayList;
  * Created by aleja on 25/01/2017.
  */
 
-public class AdaptadorLibros extends ArrayAdapter<Libro>  {
+public class AdaptadorLibros extends ArrayAdapter<Libro> implements View.OnClickListener {
 
     private TextView titulo;
     private TextView info;
-    //private android.widget.AdapterView.OnItemClickListener listener;
+    private View.OnClickListener listener;
 
     public AdaptadorLibros(Context context, ArrayList<Libro> datos) {
         super(context, R.layout.elem_libro, datos);
@@ -44,13 +44,15 @@ public class AdaptadorLibros extends ArrayAdapter<Libro>  {
         return item;
     }
 
-
-/*
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (listener != null)
-            lins
-            listener.onItemClick(parent, view, position, id);
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
     }
-*/
+
+    @Override
+    public void onClick(View view) {
+        if (listener != null)
+            listener.onClick(view);
+    }
+
+
 }
