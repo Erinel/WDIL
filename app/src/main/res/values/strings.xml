@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">WILI</string>
     <string name="enterSerie">Introduce una serie.</string>
-    <string name="subir"> + </string>
-    <string name="bajar"> - </string>
+    <string name="subir" translatable="false"> + </string>
+    <string name="bajar" translatable="false"> - </string>
     <string name="season">Temporada</string>
     <string name="cap">Capítulo</string>
     <string name="nombrenuevo">Nombre de la Serie: </string>
@@ -19,7 +19,7 @@
     <string name="enterPass">Introduce contraseña: </string>
     <string name="enterNewPass">Introduce nueva contraseña: </string>
     <string name="enterNick">Introduce nuevo nick: </string>
-    <string name="wili">Where I Left It?</string>
+    <string name="wili" translatable="false">Where I Left It?</string>
     <string name="logout">Desconectar</string>
     <string name="logoutExit">Desconectar y salir</string>
 </resources>

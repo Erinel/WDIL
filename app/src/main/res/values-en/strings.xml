@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WILI</string>
+    <string name="cap">Chapter</string>
+    <string name="capitulonuevo">Current chapter:</string>
+    <string name="enterEmail">Enter e-mail:</string>
+    <string name="enterLibro">Enter a book:</string>
+    <string name="enterManga">Enter a manga:</string>
+    <string name="enterNewPass">Enter new password:</string>
+    <string name="enterNick">Enter new nick:</string>
+    <string name="enterPass">Enter password:</string>
+    <string name="enterSerie">Enter a serie.</string>
+    <string name="listaSeries">Touch here to see all your saved series.</string>
+    <string name="logout">Log Off</string>
+    <string name="logoutExit">Log Off and Exit</string>
+    <string name="mangaNuevo">Name of the manga/comic:</string>
+    <string name="nombrenuevo">Name of the Serie:</string>
+    <string name="pagActual">"Enter your current page: "</string>
+    <string name="pagTotales">Enter his total pages (optional):</string>
+    <string name="season">Season</string>
+    <string name="temporadanuevo">Current season:</string>
+    <string name="title_activity_login">Sign In</string>
+</resources>
