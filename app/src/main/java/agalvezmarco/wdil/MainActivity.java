@@ -1,5 +1,6 @@
 package agalvezmarco.wdil;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -20,9 +21,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
+    private DatabaseReference mDatabase;
+    private FirebaseUser user;
+    private ProgressDialog dialog;
 
 
     @Override
@@ -31,26 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                finish();
-            }
-        });
         verificarLogin();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-
-
-        viewPager.setAdapter(new AdaptadorPager(getSupportFragmentManager()));
-
-        viewPager.setPageTransformer(true, new DepthPageTransformer());
-        tabLayout = (TabLayout) findViewById(R.id.tabsBar);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.setupWithViewPager(viewPager);
 
     }
 
@@ -70,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
     }
 
@@ -80,15 +67,32 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
+        int id = item.getItemId();
 
+        switch (id) {
+            case R.id.action_logout: {
+                guardarDatosUsuario();
+                FirebaseAuth.getInstance().signOut();
+                Intent in = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(in);
+                finish();
+                return true;
+            }
+            case R.id.action_exit: {
+                guardarDatosUsuario();
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                return true;
+
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 
     private void guardarDatosUsuario() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null)
-        {
+        if (user != null) {
             String uid = user.getUid();
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
             mDatabase.child("users").child(uid).child("series").setValue(Usuario.getUsuario().getSeries());
@@ -96,16 +100,88 @@ public class MainActivity extends AppCompatActivity {
             mDatabase.child("users").child(uid).child("libros").setValue(Usuario.getUsuario().getLibros());
 
         }
-        //FirebaseAuth.getInstance().signOut();
     }
 
     private void verificarLogin() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user == null) {
+        if (user == null) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
+        } else cargarDatosUsuario();
+    }
+
+    public void cargarDatosUsuario() {
+        dialog = ProgressDialog.show(MainActivity.this, "",
+                "Loading. Please wait...", true);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("Usuario", user.getEmail());
+        if (user != null) {
+            String uid = user.getUid();
+            mDatabase.child("users").child(uid).addListenerForSingleValueEvent(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Usuario.getUsuario().setSeries(cargarSeries(dataSnapshot));
+                            Usuario.getUsuario().setMangas(cargarMangas(dataSnapshot));
+                            Usuario.getUsuario().setLibros(cargarLibros(dataSnapshot));
+                            dialog.dismiss();
+
+                            cargarInterfaz();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+
+                    });
         }
-        else Log.d("User", user.getEmail().toString());
+
+    }
+
+    private ArrayList<Serie> cargarSeries(DataSnapshot ds) {
+        ArrayList<Serie> series = new ArrayList<>();
+
+        for (DataSnapshot d : ds.child("series").getChildren()) {
+            Serie aux;
+            aux = d.getValue(Serie.class);
+            series.add(aux);
+        }
+        return series;
+    }
+
+    private ArrayList<Manga> cargarMangas(DataSnapshot ds) {
+        ArrayList<Manga> ret = new ArrayList<>();
+        for (DataSnapshot d : ds.child("mangas").getChildren()) {
+            Manga aux;
+            aux = d.getValue(Manga.class);
+            ret.add(aux);
+        }
+        return ret;
+    }
+
+    private ArrayList<Libro> cargarLibros(DataSnapshot ds) {
+        ArrayList<Libro> ret = new ArrayList<>();
+        for (DataSnapshot d : ds.child("libros").getChildren()) {
+            Libro aux;
+            aux = d.getValue(Libro.class);
+            ret.add(aux);
+        }
+        return ret;
+    }
+
+    private void cargarInterfaz() {
+        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+
+
+        viewPager.setAdapter(new AdaptadorPager(getSupportFragmentManager()));
+
+        viewPager.setPageTransformer(true, new DepthPageTransformer());
+        tabLayout = (TabLayout) findViewById(R.id.tabsBar);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 }

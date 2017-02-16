@@ -56,19 +56,26 @@
 
         <Button
             android:id="@+id/sustractCapM"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:text="@string/bajar"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:background="@drawable/backgroud_button"
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/addCapM"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_weight="1"
             android:text="@string/subir"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:background="@drawable/backgroud_button" />
 
     </LinearLayout>
 

@@ -10,54 +10,70 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#00000000"
+        android:text="@string/wili"
+        android:id="@+id/titulo"
+        android:textSize="50dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
         android:text="@string/enterEmail"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/email"
-        android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"/>
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:text="@string/enterPass"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/password"
-        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"/>
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_gravity="center"
+        android:background="@drawable/backgroud_button"
+        android:text="Entrar"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        />
 
-        <Button
-            android:id="@+id/signUp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Crear cuenta" />
+    <Button
+        android:id="@+id/signUp"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Crear cuenta"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:background="@drawable/backgroud_button"/>
 
-        <Button
-            android:id="@+id/login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Entrar" />
-
-    </LinearLayout>
 
 </LinearLayout>

@@ -1,7 +1,9 @@
 package agalvezmarco.wdil;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "firebase";
     private DatabaseReference mDatabase;
     private FirebaseUser user;
+    private ProgressDialog progress;
 
 
     @Override
@@ -53,6 +57,9 @@ public class LoginActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.password);
         login = (Button) findViewById(R.id.login);
         signIn = (Button) findViewById(R.id.signUp);
+
+        TextView titulo = (TextView) findViewById(R.id.titulo);
+        titulo.setTypeface(Typeface.createFromAsset(getAssets(), "Courgette-Regular.ttf"));
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -207,8 +214,9 @@ public class LoginActivity extends AppCompatActivity {
         return builder.create();
     }
 
-    private void cargarDatosUsuario() {
+    public void cargarDatosUsuario() {
 
+        mostrarDialog();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
         Log.d("Usuario", user.getEmail());
@@ -222,8 +230,9 @@ public class LoginActivity extends AppCompatActivity {
                             Usuario.getUsuario().setSeries(cargarSeries(dataSnapshot));
                             Usuario.getUsuario().setMangas(cargarMangas(dataSnapshot));
                             Usuario.getUsuario().setLibros(cargarLibros(dataSnapshot));
+                            dismissDialog();
 
-                           cargarInterfaz();
+                            cargarInterfaz();
 
                         }
 
@@ -277,6 +286,14 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    private void mostrarDialog() {
+        if(!this.isFinishing())
+        progress = ProgressDialog.show(LoginActivity.this, "",
+                "Loading. Please wait...", true);
+    }
 
+    private void dismissDialog() {
+        progress.dismiss();
+    }
 
 }

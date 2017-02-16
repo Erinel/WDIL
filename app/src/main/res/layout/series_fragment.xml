@@ -92,35 +92,50 @@
 
                 <Button
                     android:id="@+id/sustractSeason"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp"
                     android:text="@string/bajar"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:background="@drawable/backgroud_button"/>
 
                 <Button
                     android:id="@+id/addSeason"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
                     android:text="@string/subir"
-                    android:visibility="invisible" />
+                    android:background="@drawable/backgroud_button"
+                    android:visibility="invisible"
+                    android:layout_marginRight="16dp"/>
 
                 <Button
                     android:id="@+id/sustractCap"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/bajar"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:background="@drawable/backgroud_button"
+                    android:layout_marginRight="10dp"/>
 
                 <Button
                     android:id="@+id/addCap"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/subir"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:background="@drawable/backgroud_button" />
             </TableRow>
         </TableLayout>
 
