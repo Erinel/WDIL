@@ -282,6 +282,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void cargarInterfaz() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }

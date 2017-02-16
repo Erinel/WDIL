@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by aleja on 25/01/2017.
  */
 
-public class AdaptadorLibros extends ArrayAdapter<Libro> implements View.OnClickListener {
+public class AdaptadorLibros extends ArrayAdapter<Libro>  {
 
     private TextView titulo;
     private TextView info;
@@ -44,15 +44,7 @@ public class AdaptadorLibros extends ArrayAdapter<Libro> implements View.OnClick
         return item;
     }
 
-    public void setOnClickListener(View.OnClickListener listener) {
-        this.listener = listener;
-    }
 
-    @Override
-    public void onClick(View view) {
-        if (listener != null)
-            listener.onClick(view);
-    }
 
 
 }

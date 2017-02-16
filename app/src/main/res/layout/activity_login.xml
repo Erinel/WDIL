@@ -9,11 +9,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00000000"
+        android:background="@color/transparent"
         android:text="@string/wili"
         android:id="@+id/titulo"
         android:textSize="50dp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:textAlignment="center"
         />
@@ -21,10 +21,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00000000"
+        android:background="@color/transparent"
         android:text="@string/enterEmail"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -33,15 +33,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:textColor="#FFFFFF" />
+        android:textColor="@color/white" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00000000"
+        android:background="@color/transparent"
         android:text="@string/enterPass"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:textColor="#FFFFFF" />
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/login"
@@ -59,7 +59,7 @@
         android:layout_gravity="center"
         android:background="@drawable/backgroud_button"
         android:text="Entrar"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
         />
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Crear cuenta"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:background="@drawable/backgroud_button"/>
 

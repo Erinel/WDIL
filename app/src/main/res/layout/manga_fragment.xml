@@ -18,18 +18,18 @@
         android:layout_height="40dp"
         android:layout_marginTop="100dp"
         android:hint="@string/enterManga"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF" />
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
 
 
     <TextView
         android:id="@+id/capM"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="#00000000"
+        android:background="@color/transparent"
         android:text="@string/cap"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_gravity="center"/>
@@ -39,9 +39,9 @@
         android:id="@+id/textCap"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="#00000000"
+        android:background="@color/transparent"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="30dp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:text="@string/bajar"
             android:visibility="invisible"
@@ -70,7 +70,7 @@
             android:id="@+id/addCapM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_weight="1"
             android:text="@string/subir"

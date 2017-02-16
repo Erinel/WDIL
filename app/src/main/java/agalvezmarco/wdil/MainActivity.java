@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 guardarDatosUsuario();
                 FirebaseAuth.getInstance().signOut();
                 Intent in = new Intent(getApplicationContext(), LoginActivity.class);
+                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(in);
                 finish();
                 return true;
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         } else cargarDatosUsuario();

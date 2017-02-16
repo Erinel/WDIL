@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.menu.ExpandedMenuView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,10 +113,10 @@ public class Libro_Fragment extends Fragment {
     public void rellenarLista() {
 
         adaptador = new AdaptadorLibros(getContext(), datos);
-        adaptador.setOnClickListener(new View.OnClickListener() {
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                crearDialogoEditarLibro(lista.getPositionForView(v)).show();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                crearDialogoEditarLibro(datos.get(position)).show();
             }
         });
         lista.setAdapter(adaptador);
@@ -123,7 +124,7 @@ public class Libro_Fragment extends Fragment {
 
     }
 
-    private AlertDialog crearDialogoEditarLibro(int position) {
+    private AlertDialog crearDialogoEditarLibro(Libro libro) {
 
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -137,21 +138,21 @@ public class Libro_Fragment extends Fragment {
         final Button subir = (Button) v.findViewById(R.id.subirPag);
         final Button bajar = (Button) v.findViewById(R.id.bajarPag);
 
-        final Libro pos = datos.get(position);
-        pag.setText(pos.getPagActual());
+        final Libro pos = libro;
+        pag.setText(""+pos.getPagActual());
         totales.setText("/" + pos.getPagTotales());
 
         subir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pag.setText(Integer.parseInt(pag.getText().toString()) + 1);
+                pag.setText(""+(Integer.parseInt(pag.getText().toString()) + 1));
             }
         });
 
         bajar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pag.setText(Integer.parseInt(pag.getText().toString()) - 1);
+                pag.setText(""+(Integer.parseInt(pag.getText().toString()) - 1));
             }
         });
 
