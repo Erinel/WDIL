@@ -37,7 +37,6 @@ public class Series_fragment extends Fragment {
 
 
     public Series_fragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -164,7 +163,6 @@ public class Series_fragment extends Fragment {
         return rootView;
     }
 
-    //Asigna los valores al campo de texto para rellenar.
     private void asignarValoresAutocomplete() {
 
         nombres = new String[series.size()];
@@ -175,7 +173,6 @@ public class Series_fragment extends Fragment {
         entrada.setAdapter(adaptador);
     }
     private AlertDialog crearDialogoNuevaSerie() {
-
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 

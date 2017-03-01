@@ -91,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,7 +152,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private AlertDialog crearDialogoNuevoUsuario() {
-
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -243,7 +241,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                     });
-
 
         }
 

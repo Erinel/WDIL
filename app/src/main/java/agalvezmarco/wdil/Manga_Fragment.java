@@ -109,7 +109,6 @@ public class Manga_Fragment extends Fragment {
         return rootView;
     }
 
-    //Asigna los valores al campo de texto para rellenar.
     private void asignarValoresAutocomplete() {
 
         nombres = new String[mangas.size()];
@@ -120,7 +119,6 @@ public class Manga_Fragment extends Fragment {
         entrada.setAdapter(adaptador);
     }
     private AlertDialog crearDialogoNuevaSerie() {
-
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
